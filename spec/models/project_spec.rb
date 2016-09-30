@@ -2,17 +2,16 @@ require 'rails_helper'
 
 describe Project do
   let(:project) { Project.new }
-  describe 'initialize' do
+  describe 'initialization' do
     let(:task) { Task.new }
-    it 'considers a project with no tasks to be done' do
-      project = Project.new
-      expect(project.done?).to be_truthy
+
+    it 'considers a project with no test to be done' do
+      expect(project).to be_done
     end
 
-    it 'knows that a project with an incomplete task is not done' do
-      task = Task.new
+    it 'knows that a project with an incomplete test is not done' do
       project.tasks << task
-      expect(project.done?).to be_falsy
+      expect(project).not_to be_done
     end
 
     it 'marks a project done if its tasks are done' do
@@ -20,10 +19,16 @@ describe Project do
       task.mark_completed
       expect(project).to be_done
     end
+
+    it 'properly estimates a blank project' do
+      expect(project.completed_velocity).to eq(0)
+      expect(project.current_rate).to eq(0)
+      expect(project.projected_days_remaining.nan?).to be_truthy
+      expect(project).not_to be_on_schedule
+    end
   end
 
   describe 'estimates' do
-    let(:project) { Project.new }
     let(:newly_done) { Task.new(size: 3, completed_at: 1.day.ago) }
     let(:old_done) { Task.new(size: 2, completed_at: 6.months.ago) }
     let(:small_not_done) { Task.new(size: 1) }
@@ -41,7 +46,6 @@ describe Project do
       expect(project.remaining_size).to eq(5)
     end
 
-    #
     it 'knows its velocity' do
       expect(project.completed_velocity).to eq(3)
     end
@@ -59,13 +63,6 @@ describe Project do
       expect(project).not_to be_on_schedule
       project.due_date = 6.months.from_now
       expect(project).to be_on_schedule
-    end
-
-    it 'properly estimates a blank project' do
-      expect(project.completed_velocity).to eq(0)
-      expect(project.current_rate).to eq(0)
-      expect(project.projected_days_remaining.-nan?).to be_truthy
-      expect(project).not_to be_on_schedule
     end
   end
 end
