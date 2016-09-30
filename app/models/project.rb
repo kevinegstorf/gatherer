@@ -1,6 +1,6 @@
 # Project Class
 class Project
-  attr_accessor :tasks
+  attr_accessor :tasks, :due_date
 
   def initialize
     @tasks = []
@@ -23,7 +23,7 @@ class Project
   end
 
   def completed_velocity
-    task.sum(&:points_toward_velocity)
+    tasks.sum(&:points_toward_velocity)
   end
 
   def current_rate
