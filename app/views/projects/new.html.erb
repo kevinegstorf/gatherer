@@ -1,0 +1,9 @@
+<h1>New Project</h1>
+
+<%= form_for @project do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :tasks %>
+  <%= text_area_tag :"project[tasks]" %>
+  <%= f.submit %>
+<% end %>
