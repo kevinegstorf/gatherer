@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Project do
   let(:project) { Project.new }
+
   describe 'initialization' do
     let(:task) { Task.new }
 
