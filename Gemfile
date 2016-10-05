@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -41,6 +41,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.1'
   gem 'byebug'
   gem 'rubocop'
+
+  gem 'simplecov', '~> 0.7.1', require: false
 end
 
 group :development do
