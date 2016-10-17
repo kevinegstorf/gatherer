@@ -1,0 +1,10 @@
+runway:
+  name: Project Runway
+  due_date: <%= 1.month.from_now %>
+  description: |
+    The awesomest project ever.
+    It's really, really great
+
+book:
+  name: Write the book
+  due_date: 2018-04-14

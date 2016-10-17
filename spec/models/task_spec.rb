@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe Task do
+
+  # it_should_behave_like "sizeable"
+
   it 'can distinguish a completed task' do
     task = Task.new
     expect(task).not_to be_complete
